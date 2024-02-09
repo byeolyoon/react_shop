@@ -12,9 +12,10 @@ import {
   useAsyncValue,
 } from "react-router-dom";
 import Detail from "./pages/Detail.js";
+import axios from "axios";
 
 function App() {
-  let [shoes] = useState(data);
+  let [shoes, setShoes] = useState(data);
 
   let navigate = useNavigate();
 
@@ -59,6 +60,25 @@ function App() {
                   })}
                 </div>
               </div>
+              <button
+                onClick={() => {
+                  axios
+                    .get("https://codingapple1.github.io/shop/data2.json")
+                    .then((결과) => {
+                      let copy = [...shoes, ...결과.data];
+                      setShoes(copy);
+                    });
+                  axios.post("/url1");
+                  axios
+                    .post("/url2")
+
+                    .catch(() => {
+                      console.log("실패");
+                    });
+                }}
+              >
+                버튼
+              </button>
             </>
           }
         />
